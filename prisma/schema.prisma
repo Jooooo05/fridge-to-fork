@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id             String          @id @default(cuid())
+  name           String?
+  email          String          @unique
+  password       String?
+  image          String?
+  createdAt      DateTime        @default(now())
+
+  preference     UserPreference?
+  savedRecipes   SavedRecipe[]
+  ingredientLogs IngredientLog[]
+
+  @@map("users")
+}
+
+model UserPreference {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  dietType  String[]
+  allergies String[]
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_preferences")
+}
+
+model SavedRecipe {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  description String?
+  ingredients Json
+  steps       Json
+  cookTime    Int
+  servings    Int
+  nutrition   Json
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("saved_recipes")
+}
+
+model IngredientLog {
+  id          String   @id @default(cuid())
+  userId      String
+  ingredients String[]
+  usedAt      DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("ingredient_logs")
+}
