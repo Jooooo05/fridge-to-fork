@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation"; 
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -87,7 +88,7 @@ export default function RegisterPage() {
                             {loading ? "Mendaftar..." : "Daftar"}
                         </Button>
                         <p className="text-sm text-slate-500">Sudah punya akun?{""}
-                            <Link href="/auth/login" className="text-blue-500 hover:underline ml-1">Masuk</Link>
+                            <Button type="button" variant="link" onClick={() => signIn()} className="text-blue-500 hover:underline cursor-pointer">Masuk</Button>
                         </p>
                     </CardFooter>
                 </form>

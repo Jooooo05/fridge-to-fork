@@ -21,20 +21,30 @@ export default function LoginPage() {
     
         const formData = new FormData(e.currentTarget);
 
-        const result = await signIn("credentials", {
+        console.log({
             email: formData.get("email"),
             password: formData.get("password"),
-            redirect: false,
         });
+        // return;
+        try {            
+            const result = await signIn("credentials", {
+                redirect: false,
+                email: formData.get("email"),
+                password: formData.get("password"),
+                callbackUrl: "/dashboard", 
+            });
 
-        if (result?.error) {
-            setError(result.error);
+            if (!result?.error) {
+                router.push("/dashboard");
+            } else {
+                setError(result.error || "Login failed");
+                setLoading(false);
+            }
+        } catch (error) {
+            setError("An error occurred during login.");
             setLoading(false);
             return;
         }
-
-        router.push("/");
-        router.refresh();
     }
 
     return (
