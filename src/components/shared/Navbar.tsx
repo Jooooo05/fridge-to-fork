@@ -59,7 +59,7 @@ export default function Navbar() {
     return (
         <>
             <motion.header 
-                className={`fixed top-0 left-0 right-0 z-40 md:top-8 md:max-w-[1000px] mx-auto md:rounded-2xl border-2 border-slate-900 transition-all duration-300 ${
+                className={`fixed top-0 left-0 right-0 z-40 md:top-8 md:max-w-250 mx-auto md:rounded-2xl border-2 border-slate-900 transition-all duration-300 ${
                     scrolled 
                         ? 'bg-white/10 backdrop-blur-md shadow-lg' 
                         : 'bg-white/5 backdrop-blur-sm'
@@ -74,7 +74,7 @@ export default function Navbar() {
                 }}
             >
                 <motion.div
-                    className="container mx-auto px-10 h-[76px] flex items-center justify-between"
+                    className="container mx-auto px-10 h-19 flex items-center justify-between"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
@@ -132,7 +132,7 @@ export default function Navbar() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: "100%" }}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            className="fixed inset-0 top-[74px] h-screen bg-main/95 backdrop-blur-md z-50 md:hidden"
+                            className="fixed inset-0 top-18.5 h-screen bg-main/95 backdrop-blur-md z-50 md:hidden"
                         >
                             <div className="flex flex-col h-full p-4">
                                 <nav className="flex flex-col space-y-4 py-8">
