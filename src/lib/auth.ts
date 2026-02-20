@@ -7,7 +7,7 @@ export const authOptions: NextAuthOptions = {
     session: { 
         strategy: "jwt"
     },
-    secret:"nantidigantipakaienv",
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
             type: "credentials",
